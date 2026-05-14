@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Canva | Full Catalog</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: #fdfaf5; 
+            color: #000;
+        }
+
+        /* --- MAIN GRID --- */
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            height: 100vh;
+            padding: 20px; 
+            gap: 15px;
+        }
+
+        @media (max-width: 900px) {
+            .main-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(4, 1fr);
+                height: auto;
+            }
+        }
+
+        .category-link {
+            text-decoration: none;
+            color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .category-link:hover .card-content {
+            transform: scale(1.05); 
+        }
+
+        .main-img-box {
+            width: 80%;
+            height: 60%;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .main-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        /* --- DETAILS PAGE --- */
+        .detail-page {
+            display: none; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fdfaf5;
+            z-index: 1000;
+            padding: 40px;
+            overflow-y: auto; 
+        }
+
+        .detail-page:target {
+            display: block;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            text-decoration: none;
+            color: #000;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            background: #fff;
+            padding: 10px 15px;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1100;
+        }
+
+        .page-header {
+            text-align: center;
+            margin: 60px 0 60px 0;
+        }
+
+        .page-header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            row-gap: 60px;
+            column-gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding-bottom: 80px;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .item-img-placeholder {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background-color: #f5f5f5;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 2px;
+        }
+
+        .item-img-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-name {
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-align: center;
+            color: #333;
+        }
+
+        /* --- PRODUCT EXPAND OVERLAY --- */
+        #product-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fdfaf5;
+            z-index: 2000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: expandUp 0.4s ease-out;
+        }
+
+        @keyframes expandUp {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .overlay-img {
+            width: 80%;
+            max-width: 400px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .overlay-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        /* Instagram Box with Blend/Gradient Color */
+        .insta-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 25px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-decoration: none;
+            color: #000;
+            width: 340px;
+        }
+
+        .insta-text {
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .insta-icon-wrapper {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1.3rem;
+        }
+
+        .close-overlay {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 2.5rem;
+            cursor: pointer;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-grid">
+        <a href="#cat1" class="category-link"><div class="card-content"><div class="main-img-box"><img src="t-shirt background.jpg"></div><div class="product-title">T-shirt</div></div></a>
+        <a href="#cat2" class="category-link"><div class="card-content"><div class="main-img-box"><img src="jacket background.png"></div><div class="product-title">HOODIES & JACKET</div></div></a>
+        <a href="#cat3" class="category-link"><div class="card-content"><div class="main-img-box"><img src="apparel background.jpg"></div><div class="product-title">AOP Apparel</div></div></a>
+        <a href="#cat4" class="category-link"><div class="card-content"><div class="main-img-box"><img src="wear background.png"></div><div class="product-title">BOTTOMWEAR</div></div></a>
+        <a href="#cat5" class="category-link"><div class="card-content"><div class="main-img-box"><img src="kids cloths bgggggg.jpg"></div><div class="product-title">kids clothing</div></div></a>
+        <a href="#cat6" class="category-link"><div class="card-content"><div class="main-img-box"><img src="headddd wear background.jpg"></div><div class="product-title">headwear</div></div></a>
+        <a href="#cat7" class="category-link"><div class="card-content"><div class="main-img-box"><img src="drinkkkkk  background.jpg"></div><div class="product-title">Drinkware</div></div></a>
+        <a href="#cat8" class="category-link"><div class="card-content"><div class="main-img-box"><img src="acessore background.jpg"></div><div class="product-title">accessories</div></div></a>
+    </div>
+
+    <div id="cat1" class="detail-page">
+        <a href="#" class="back-btn">← Back</a>
+        <div class="page-header"><h1>T-shirt</h1></div>
+        <div class="two-col-grid">
+            <div class="item"><div class="item-img-placeholder"><img src="img 1 t-shirt.png"></div><div class="item-name">Boys Classic Crew</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="img 2 t-shirt.png"></div><div class="item-name">Male polo</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="img 3 t-shirt.png"></div><div class="item-name">Male full sleeve</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="img 4 t-shirt.png"></div><div class="item-name">Male raglan</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="img 5 t-shirt.png"></div><div class="item-name">Male Sleeveless</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="img 6 t-shirt.png"></div><div class="item-name">Male Standard crew</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="img 7  t-shirt.png"></div><div class="item-name">male V neck</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="img 8 t-shirt.png"></div><div class="item-name">female Baby Tee</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="t-shirt img 9.png"></div><div class="item-name">female Classic Crew</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="t-shirt img 10.png"></div><div class="item-name">female Crop Tank</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="t-shirt img 11.png"></div><div class="item-name">female Maternity Dress</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="t-shirt img 12.png"></div><div class="item-name">female Tank top</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="t-shirt img 13.png"></div><div class="item-name">Unisex Cotton Stretch</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="t-shirt img 14.png"></div><div class="item-name">Unisex oversized standard</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="t-shirt img 15.png"></div><div class="item-name">Unisex Acid Wash Oversized Tee</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="t-shirt img 16.png"></div><div class="item-name">Unisex oversized supima</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="t-shirt img 17.png"></div><div class="item-name">Unisex Basic T-shirt PC</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="t-shirt img 18.png"></div><div class="item-name">Unisex oversized Classic</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="t-shirt img 19.png"></div><div class="item-name">Unisex Terry oversized tee</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="t-shirt img 20.png"></div><div class="item-name">Unisex Tie DYE oversized</div></div>
+        </div>
+    </div>
+
+    <div id="cat2" class="detail-page">
+        <a href="#" class="back-btn">← Back</a>
+        <div class="page-header"><h1>HOODIES & JACKET</h1></div>
+        <div class="two-col-grid">
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 1.png"></div><div class="item-name">Unisex pull over hoodie</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 2.png"></div><div class="item-name">Unisex acid wash hoodies</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 3.png"></div><div class="item-name">Unisex AOP Bomber jacket</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 4.png"></div><div class="item-name">Unisex AOP sweatshirt</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 5.png"></div><div class="item-name">Unisex Hoodie</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 6.png"></div><div class="item-name">Unisex oversized hoodies</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 7.png"></div><div class="item-name">Unisex oversized sweatshirt</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 8.png"></div><div class="item-name">Unisex sweatshirt</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 9.png"></div><div class="item-name">Unisex Varity Jacket</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 10.png"></div><div class="item-name">Unisex zip hoodie</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 11.png"></div><div class="item-name">female AOP bomber Jacket</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 12.png"></div><div class="item-name">female Cropped hoodies</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 13.png"></div><div class="item-name">kids AOP bomber Jacket</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 14.png"></div><div class="item-name">AOP sweatshirt</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 15.png"></div><div class="item-name">Kids hoodie</div></div>
+        </div>
+    </div>
+
+    <div id="cat3" class="detail-page">
+        <a href="#" class="back-btn">← Back</a>
+        <div class="page-header"><h1>AOP Apparel</h1></div>
+        <div class="two-col-grid">
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 1.png"></div><div class="item-name">AOP scarf</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 2.png"></div><div class="item-name">AOP stole</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 3.png"></div><div class="item-name">Arm sleeves</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 4.png"></div><div class="item-name">Balaclava</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 5.png"></div><div class="item-name">Headband</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 11.png"></div><div class="item-name">male AOP full sleeve TEE</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 12.png"></div><div class="item-name">male AOP sleeveless TEE</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 13.png"></div><div class="item-name">male AOP T shirt</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 15.png"></div><div class="item-name">female AOP A line dress</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 16.png"></div><div class="item-name">female AOP bodycon</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 11.png"></div><div class="item-name">female AOP bomber jacket</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="t-shirt img 10.png"></div><div class="item-name">female AOP crop Tank</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 19.png"></div><div class="item-name">female AOP crop Top</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 20.png"></div><div class="item-name">female AOP Gym Legging</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 21.png"></div><div class="item-name">female AOP pencil skirt</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 22.png"></div><div class="item-name">female AOP sports Bra</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="t-shirt img 12.png"></div><div class="item-name">female AOP tank top</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 24.png"></div><div class="item-name">female AOP T-shirt Dress</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 25.png"></div><div class="item-name">female AOP T-shirt</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 26.png"></div><div class="item-name">female AOP tube top</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 27.png"></div><div class="item-name">female Kaftan dress</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 28.png"></div><div class="item-name">female mini skirt</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 13.png"></div><div class="item-name">kids AOP bomber jacket</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 7.png"></div><div class="item-name">kids AOP sports shorts</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 8.png"></div><div class="item-name">kids AOP sports T- shirts</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 14.png"></div><div class="item-name">kids AOP sweatshirt</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 34.png"></div><div class="item-name">Unisex AOP sweatshirt</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 29.png"></div><div class="item-name">Unisex AOP bomber jacket</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 30.png"></div><div class="item-name">Unisex AOP oversized TEE</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 31.png"></div><div class="item-name">Unisex AOP shorts</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 33.png"></div><div class="item-name">Unisex AOP sports T-shirt</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 32.png"></div><div class="item-name">Unisex AOP sports shorts</div></div>
+        </div>
+    </div>
+
+    <div id="cat4" class="detail-page">
+        <a href="#" class="back-btn">← Back</a>
+        <div class="page-header"><h1>BOTTOMWEAR</h1></div>
+        <div class="two-col-grid">
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 7.png"></div><div class="item-name">kids AOP sports shorts</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 31.png"></div><div class="item-name">Unisex AOP shorts</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 32.png"></div><div class="item-name">Unisex AOP sports shorts</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="bottomwear img 1.png"></div><div class="item-name">Unisex jogger</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="bottomwear img 2.png"></div><div class="item-name">Unisex sweatpants</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="bottomwear img 3.png"></div><div class="item-name">Unisex Terry shorts</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="bottomwear img 4.png"></div><div class="item-name">Unisex Tie dye shorts</div></div>
+        </div>
+    </div>
+
+    <div id="cat5" class="detail-page">
+        <a href="#" class="back-btn">← Back</a>
+        <div class="page-header"><h1>kids clothing</h1></div>
+        <div class="two-col-grid">
+            <div class="item"><div class="item-img-placeholder"><img src="img 1 t-shirt.png"></div><div class="item-name">classic crew T- shirt</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 13.png"></div><div class="item-name">AOP bomber jacket</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 7.png"></div><div class="item-name">AOP sports shorts</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 33.png"></div><div class="item-name">AOP sports T-shirt</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 14.png"></div><div class="item-name">AOP sweatshirt</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 8.png"></div><div class="item-name">AOP t-shirt</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="hoodies and jacket img 15.png"></div><div class="item-name">kids hoodie</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="kids wear img 1.png"></div><div class="item-name">kids rompers</div></div>
+        </div>
+    </div>
+
+    <div id="cat6" class="detail-page">
+        <a href="#" class="back-btn">← Back</a>
+        <div class="page-header"><h1>headwear</h1></div>
+        <div class="two-col-grid">
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 4.png"></div><div class="item-name">Balaclava</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="headwear img 1.png"></div><div class="item-name">face bandana</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 5.png"></div><div class="item-name">Head band</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="headwear img 2.png"></div><div class="item-name">Base ball ottoman cap</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="headwear img 3.png"></div><div class="item-name">Classic Base ball cap</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="headwear img 4.png"></div><div class="item-name">Unisex classic Bucket hat</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="headwear img 5.png"></div><div class="item-name">Unisex classic snapback cap</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="headwear img 6.png"></div><div class="item-name">Classic trucker cap</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="headwear img 7.png"></div><div class="item-name">Sports cap</div></div>
+        </div>
+    </div>
+
+    <div id="cat7" class="detail-page">
+        <a href="#" class="back-btn">← Back</a>
+        <div class="page-header"><h1>Drinkware</h1></div>
+        <div class="two-col-grid">
+            <div class="item"><div class="item-img-placeholder"><img src="drinkwear img 1.png"></div><div class="item-name">Black coffee Mug</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="drinkwear img 2.png"></div><div class="item-name">Color Coffee Mug</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="drinkwear img 3.png"></div><div class="item-name">Magic Coffee Mug</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="drinkwear img 4.png"></div><div class="item-name">Sipper Bottle</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="drinkwear img 5.png"></div><div class="item-name">Steel Water Bottle</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="drinkwear img 6.png"></div><div class="item-name">Tumbler Bottle</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="drinkwear img 7.png"></div><div class="item-name">White Coffee mug</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="drinkwear img 8.png"></div><div class="item-name">white Enamel Mugs</div></div>
+        </div>
+    </div>
+
+    <div id="cat8" class="detail-page">
+        <a href="#" class="back-btn">← Back</a>
+        <div class="page-header"><h1>accessories</h1></div>
+        <div class="two-col-grid">
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 1.png"></div><div class="item-name">Acrylic coaster</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 1.png"></div><div class="item-name">AOP scarf</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 2.png"></div><div class="item-name">AOP stole</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 2.png"></div><div class="item-name">AOP women scrunchies</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="aop apperals img 3.png"></div><div class="item-name">Arm sleeves</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 3.png"></div><div class="item-name">Black Badge</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 4.png"></div><div class="item-name">Bookmark</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 8.png"></div><div class="item-name">Bow scrunchies</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 9.png"></div><div class="item-name">Dog Tag</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 10.png"></div><div class="item-name">Embroidery Patches</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 11.png"></div><div class="item-name">Gaming pad</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 12.png"></div><div class="item-name">Greeting Card</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 13.png"></div><div class="item-name">Hard Clear Case</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 14.png"></div><div class="item-name">iPhone Glass Case</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 15.png"></div><div class="item-name">keychan</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 16.png"></div><div class="item-name">Luggage tag</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 17.png"></div><div class="item-name">Mouse pad</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 18.png"></div><div class="item-name">personalized pens</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 19.png"></div><div class="item-name">phone Grip</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 20.png"></div><div class="item-name">postcards</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 21.png"></div><div class="item-name">sticker</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 22.png"></div><div class="item-name">unisex apron</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 23.png"></div><div class="item-name">Temporary tattoos</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 24.png"></div><div class="item-name">frame poster</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 25.png"></div><div class="item-name">fridge magnet</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 26.png"></div><div class="item-name">jigsaw puzzle</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 27.png"></div><div class="item-name">MDF wooden puzzle</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 28.png"></div><div class="item-name">note pad</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 29.png"></div><div class="item-name">poster</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 30.png"></div><div class="item-name">Unisex AOP cushion cover</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 31.png"></div><div class="item-name">unisex AOP drawstring bag</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 32.png"></div><div class="item-name">AOP pillow cover</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 33.png"></div><div class="item-name">Unisex tote bag Zipper</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 34.png"></div><div class="item-name">sketchbook</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 35.png"></div><div class="item-name">everyday large Tote bag</div></div>
+            <div class="item"><div class="item-img-placeholder"><img src="accessories  img 36.png"></div><div class="item-name">Daily planner</div></div>
+        </div>
+    </div>
+
+    <div id="product-overlay">
+        <span class="close-overlay" onclick="closeOverlay()">&times;</span>
+        <img id="overlay-img" class="overlay-img" src="" alt="Product">
+        <div id="overlay-name" class="overlay-name">Product Name</div>
+        
+        <a href="https://www.instagram.com/primecanva.s?igsh=MWI1ODJtZHY4dmQ3aQ==" target="_blank" class="insta-box">
+            <span class="insta-text">for more secure transaction and order &rarr;</span>
+            <div class="insta-icon-wrapper">
+                <i class="fab fa-instagram"></i>
+            </div>
+        </a>
+    </div>
+
+    <script>
+        // Automatic Script to handle clicks for all products
+        document.querySelectorAll('.item').forEach(item => {
+            item.addEventListener('click', function() {
+                const imgSrc = this.querySelector('img').src;
+                const name = this.querySelector('.item-name').innerText;
+                
+                document.getElementById('overlay-img').src = imgSrc;
+                document.getElementById('overlay-name').innerText = name;
+                document.getElementById('product-overlay').style.display = 'flex';
+            });
+        });
+
+        function closeOverlay() {
+            document.getElementById('product-overlay').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>

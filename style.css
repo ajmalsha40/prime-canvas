@@ -1,0 +1,806 @@
+:root {
+    --gold-color: #A38C5E;
+    --light-gold: #C0AC86;
+    --text-dark: #3d3d36;
+    --text-mid: #55585D;
+    --bg-color: #FFFFFF;
+    --footer-bg: #2F3134;
+    --footer-text: #B4B7BA;
+    --logo-color: #B89C6A;
+    --primary-color: #1A1A1A;
+    --bgc-color: #F9F7F2;
+    --RETRO-COLOR: #745136;
+    
+    --font-heading: 'Garamond Premr Pro', 'Times New Roman', serif;
+    --font-body: 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-dis: 'Montserrat', sans-serif;
+    --font-check: 'Montserrat', sans-serif;
+    --font-must: 'Lato', sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    background-color: var(--bgc-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: white;
+    border-bottom: 1px solid #EDEDED;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 30px;
+    font-weight: bold;
+    background: linear-gradient(#bd9b2e, #865d3e);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    font-family: var(--font-dis);
+    color: var(--primary-color);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* ആനിമേഷൻ ക്ലാസ് */
+.hover-animate {
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.hover-animate:hover {
+    transform: scale(1.1); /* ബൾബ് ചെയ്ത് കാണാൻ */
+}
+
+.btn-create, .btn-start {
+    font-family: var(--font-check);
+    background: linear-gradient(#c59c44, #b89a60);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.btn-create {
+    padding: 10px 22px;
+    font-size: 11px;
+}
+
+/* Main Area Centering */
+.hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.hero-text-area {
+    max-width: 900px;
+}
+
+h1 {
+    font-family: var(--font-heading);
+    font-size: 40px;
+    margin-bottom: 15px;
+    color : var(--footer-bg)
+}
+
+.gold-text { color: var(--RETRO-COLOR); }
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.image-container img {
+    width: 200px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    position: relative; /* പുതിയ ആനിമേഷന് വേണ്ടി ചേർത്തത് */
+}
+
+.btn-start {
+    padding: 15px 40px;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.discover-link {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* Footer bottom alignment */
+footer {
+    background-color: var(--footer-bg);
+    padding: 40px 0;
+    margin-top: auto;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+}
+
+.footer-nav ul {
+    gap: 20px;
+}
+
+.footer-nav a {
+    color: var(--footer-text);
+}
+
+.social-icons a {
+    color: white;
+    margin-left: 15px;
+    font-size: 20px;
+}
+
+/* --- പുതിയ ഇമേജ് ആനിമേഷനുകൾ (മാറ്റം വരുത്തിയത് ഇവിടെയാണ്) --- */
+
+.img-middle {
+    z-index: 3;
+    opacity: 0;
+    animation: slideUpMiddle 0.5s ease-out forwards;
+}
+
+.img-left {
+    z-index: 1;
+    opacity: 0;
+    /* മിഡിൽ ഇമേജ് വന്ന് കഴിഞ്ഞതിന് ശേഷം (0.6s delay) സ്പ്ലിറ്റ് ആവാൻ തുടങ്ങും */
+    animation: splitLeft 0.8s ease-out 0.6s forwards;
+}
+
+.img-right {
+    z-index: 1;
+    opacity: 0;
+    animation: splitRight 0.8s ease-out 0.6s forwards;
+}
+
+/* താഴെ നിന്ന് നടുവിലേക്ക് വരാൻ */
+@keyframes slideUpMiddle {
+    0% { top: 150px; opacity: 0; }
+    100% { top: 0px; opacity: 1; }
+}
+
+/* നടുവിൽ നിന്ന് ഇടത്തോട്ട് പോകാൻ (Width 200px + Gap 30px = 230px) */
+@keyframes splitLeft {
+    0% { left: 230px; opacity: 1; }
+    100% { left: 0px; opacity: 1; }
+}
+
+/* നടുവിൽ നിന്ന് വലത്തോട്ട് പോകാൻ */
+@keyframes splitRight {
+  0% {
+    right: 230px;
+    opacity: 0;
+    transform: translateX(0); /* ഈ ലൈൻ ചേർക്കുക */
+  }
+  100% {
+    right: 0px;
+    opacity: 1;
+    transform: translateX(20px); /* ഈ ലൈൻ ചേർക്കുക, ദൂരം മാറ്റാം */
+  }
+}
+/* auth.css - Sign Up & Login Modal CSS */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px); /* Transparent blur effect */
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-overlay.hidden {
+    display: none;
+}
+
+.modal-box {
+    background-color: transparent;
+    padding: 30px;
+    width: 350px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.auth-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.auth-section.hidden {
+    display: none;
+}
+
+.input-container input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    font-family: 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    background-color: transparent;
+    box-sizing: border-box;
+    font-weight: bold;
+    outline: none;
+}
+
+/* Error കാണിക്കാനുള്ള സ്റ്റൈൽ */
+.input-container input.error::placeholder {
+    color: red;
+    font-weight: bold;
+}
+
+.action-btn {
+    background-color: #B89C6A; /* Sign up button color */
+    color: white;
+    border: 2px solid #333;
+    border-radius: 20px;
+    padding: 10px;
+    font-family: 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 150px;
+    align-self: center;
+}
+
+.switch-link {
+    text-align: right;
+    margin-top: 5px;
+}
+
+.switch-link span {
+    font-family: 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+}
+
+.switch-link span:hover {
+    text-decoration: underline;
+}
+/* --- കാറ്റഗറി സെക്ഷൻ (8 ഇമേജുകൾ) --- */
+.categories-section {
+    padding: 60px 20px;
+    background-color: var(--bgc-color);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.grid-8 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.category-box {
+    text-align: center;
+    cursor: pointer;
+}
+
+/* ബോർഡറും ബാക്ക്ഗ്രൗണ്ടും ഒഴിവാക്കി ഇമേജ് ഫ്രീ ആയി നിൽക്കാൻ */
+.img-box {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background-color: transparent; /* ബാക്ക്ഗ്രൗണ്ട് കളർ റിമൂവ് ചെയ്തു */
+    border: none; /* ബോർഡർ റിമൂവ് ചെയ്തു */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+.img-box:hover {
+    transform: scale(1.05);
+}
+
+.category-name {
+    margin-top: 15px;
+    font-family: var(--font-dis);
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--text-dark);
+}
+
+/* --- പ്രൊഡക്റ്റ് ഫുൾ പേജ് --- */
+.product-full-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* ഫുൾ സ്ക്രീൻ വീതി */
+    height: 100vh; /* ഫുൾ സ്ക്രീൻ ഉയരം */
+    background-color: var(--bgc-color, #fff);
+    z-index: 10000;
+    overflow-y: auto; /* താഴോട്ട് സ്ക്രോൾ ചെയ്യാൻ */
+    box-sizing: border-box;
+    padding: 30px 20px;
+}
+
+.product-page-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 80px; /* അവസാനത്തെ ഐറ്റം വ്യക്തമായി കാണാൻ പാഡിങ് */
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+.canvas-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.canvas-header h2 {
+    font-size: 28px;
+    margin: 0 0 10px 0;
+    letter-spacing: 2px;
+}
+
+.canvas-header h3 {
+    font-size: 18px;
+    margin: 0;
+    font-weight: normal;
+}
+
+/* രണ്ട് ഫേസ് (2 Columns) വെച്ചുള്ള ഗ്രിഡ് */
+.grid-2-col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 കോളങ്ങൾ */
+    gap: 20px;
+}
+
+.product-card { 
+    text-align: center; 
+    padding: 10px;
+}
+
+.product-label {
+    margin-top: 10px;
+    font-family: var(--font-dis);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+    display: block;
+}
+
+.hidden { display: none !important; }
+/* വീഡിയോ കണ്ടെയ്നർ */
+.hero-video-wrapper {
+    position: absolute; /* ഇത് പ്രധാനമാണ്, എങ്കിലേ ബാക്കി കണ്ടന്റ് ഇതിന് മുകളിൽ വരൂ */
+    top: 80px; /* നിങ്ങളുടെ ഹെഡറിന്റെ ഏകദേശം ഉയരം */
+    left: 0;
+    width: 100%;
+    height: 600px; /* വീഡിയോ നിൽക്കേണ്ട ആ വര വരെയുള്ള ഉയരം ഇവിടെ നൽകുക */
+    overflow: hidden;
+    z-index: 0; /* വീഡിയോ ബേസ് ലെയറിൽ നിൽക്കാൻ */
+}
+
+.background-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ഫെയ്ഡ് എഫക്റ്റ് (ഇവിടെയാണ് നിങ്ങൾ ചോദിച്ച മങ്ങൽ മാറ്റേണ്ടത്) */
+.video-overlay-fade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* മങ്ങൽ കൂട്ടാൻ താഴെ 0.7 അല്ലെങ്കിൽ 0.8 നൽകുക. ബ്രൈറ്റ്നസ് കുറയും */
+    background: linear-gradient(to bottom, rgba(196, 191, 191, 0.5), rgba(255, 255, 255, 0.8)); 
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ഇമേജുകളും ടെക്സ്റ്റും വീഡിയോയുടെ മുകളിൽ വരാൻ */
+.hero-section {
+    position: relative; /* വീഡിയോയുടെ മുകളിൽ വരാൻ ഇത് നിർബന്ധമാണ് */
+    z-index: 2; /* വീഡിയോയേക്കാൾ വലിയ നമ്പർ നൽകണം */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+    background: transparent; /* ബാക്ക്ഗ്രൗണ്ട് കളർ ഒഴിവാക്കുക */
+}
+
+.image-container img {
+    position: relative;
+    z-index: 10; /* ഇമേജുകൾ ഏറ്റവും മുകളിൽ വരാൻ */
+    width: 200px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* ഷാഡോ അല്പം കൂട്ടി */
+}
+/* --- HOW IT WORKS TOOLTIP & ANIMATION --- */
+
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Hover Underline Animation */
+.how-it-works-link {
+    position: relative;
+    text-decoration: none;
+    color: var(--primary-color);
+    padding-bottom: 4px;
+}
+
+.how-it-works-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #000; /* Black line */
+    transition: width 0.4s ease-in-out;
+}
+
+.how-it-works-link:hover::after {
+    width: 100%;
+}
+
+/* Tooltip Box Design */
+.tooltip-content {
+    display: none; /* ആദ്യമേ ഹൈഡ് ചെയ്തു വെക്കുന്നു */
+    position: absolute;
+    top: 180%; /* ലിങ്കിന്റെ താഴെയായി വരാൻ */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    max-height: 400px; /* കൂടുതൽ ടെക്സ്റ്റ് ഉള്ളതുകൊണ്ട് സ്ക്രോൾ ചെയ്യാൻ */
+    overflow-y: auto;
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.6;
+    text-transform: none;
+    text-align: left;
+    opacity: 0;
+}
+
+/* പോപ്പ്-അപ്പ് കാണിക്കാനുള്ള ക്ലാസ് */
+.tooltip-content.show {
+    display: block;
+    opacity: 1;
+    animation: fadeInTooltip 0.3s ease-in-out;
+}
+
+@keyframes fadeInTooltip {
+    from { opacity: 0; transform: translate(-50%, -10px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* ടൂൾടിപ്പിന് മുകളിലുള്ള ചെറിയ ത്രികോണം (Arrow) */
+.tooltip-content::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0 10px 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent var(--primary-color) transparent;
+}
+
+.tooltip-content::after {
+    content: '';
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0 8px 8px 8px;
+    border-style: solid;
+    border-color: transparent transparent var(--bg-color) transparent;
+}
+
+/* പോപ്പ്-അപ്പിലെ ടെക്സ്റ്റ് സ്റ്റൈൽ */
+.tooltip-content p {
+    margin-bottom: 12px;
+}
+
+.prime-note {
+    background-color: var(--bgc-color);
+    padding: 10px;
+    border-left: 3px solid var(--RETRO-COLOR);
+    font-size: 11px;
+    margin-top: 15px;
+}
+/* ഫൂട്ടറിലെ ടൂൾടിപ്പ് മുകളിലോട്ട് വരാൻ */
+.footer-tooltip .tooltip-content {
+    top: auto;
+    bottom: 180%; /* താഴെ നിന്ന് മുകളിലോട്ട് പൊങ്ങാൻ */
+}
+
+/* ഫൂട്ടറിലെ ടൂൾടിപ്പിന്റെ അമ്പടയാളം (Arrow) താഴേക്ക് തിരിക്കാൻ */
+.footer-tooltip .tooltip-content::before {
+    top: auto;
+    bottom: -10px;
+    border-width: 10px 10px 0 10px;
+    border-color: var(--primary-color) transparent transparent transparent;
+}
+
+.footer-tooltip .tooltip-content::after {
+    top: auto;
+    bottom: -7px;
+    border-width: 8px 8px 0 8px;
+    border-color: var(--bg-color) transparent transparent transparent;
+}
+
+/* ഫൂട്ടറിൽ ആനിമേഷൻ വരുമ്പോൾ ഉള്ള മാറ്റം */
+@keyframes fadeInTooltipFooter {
+    from { opacity: 0; transform: translate(-50%, 10px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.footer-tooltip .tooltip-content.show {
+    animation: fadeInTooltipFooter 0.3s ease-in-out;
+}
+/* --- PRODUCTS TOOLTIP & TEXT STYLE --- */
+.product-list-content {
+    width: 240px; /* പ്രോഡക്റ്റ് ലിസ്റ്റിന് അനുയോജ്യമായ വീതി */
+    padding: 15px 20px;
+}
+
+.product-item {
+    font-family: var(--font-dis);
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--text-dark);
+    cursor: pointer;
+    padding: 8px 0;
+    margin: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.product-item:last-child {
+    border-bottom: none; /* അവസാനത്തെ ഐറ്റത്തിന്റെ ലൈൻ ഒഴിവാക്കുന്നു */
+}
+
+/* ഹോവർ ചെയ്യുമ്പോൾ ഉള്ള മാറ്റങ്ങൾ */
+.product-item:hover {
+    color: var(--RETRO-COLOR);
+    padding-left: 5px; /* അല്പം വലത്തോട്ട് നീങ്ങി നിൽക്കാൻ */
+}
+/* ആനിമേഷൻ തുടങ്ങുന്നതിന് മുൻപുള്ള അവസ്ഥ */
+.category-box {
+    opacity: 0;
+    position: relative;
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ആനിമേഷൻ നടക്കുമ്പോൾ ഉള്ള സ്റ്റൈൽ */
+.category-box.animate {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) !important;
+}
+
+/* ഒന്നാമത്തെ ഇമേജിന്റെ പൊസിഷനിൽ നിന്ന് മറ്റുള്ളവ തുടങ്ങാൻ (Initial Positions) */
+/* ഒന്നാമത്തെ ഇമേജ് മാത്രം സ്ട്രൈറ്റ് ആയി വരുന്നു */
+.category-box:nth-child(1) { transform: scale(0.5); }
+
+/* 2, 3, 4 ഇമേജുകൾ സൈഡിൽ നിന്ന് വരുന്നു */
+.category-box:nth-child(2) { transform: translate(-100px, -50px) scale(0.5); }
+.category-box:nth-child(3) { transform: translate(-200px, -80px) scale(0.5); }
+.category-box:nth-child(4) { transform: translate(-300px, -100px) scale(0.5); }
+
+/* 5, 6, 7, 8 ഇമേജുകൾ സ്ലൈറ്റ് ബെൻഡ് ആയി താഴേക്ക് വരുന്നു */
+.category-box:nth-child(5) { transform: translate(-50px, 150px) scale(0.5); }
+.category-box:nth-child(6) { transform: translate(-150px, 200px) scale(0.5); }
+.category-box:nth-child(7) { transform: translate(-250px, 250px) scale(0.5); }
+.category-box:nth-child(8) { transform: translate(-350px, 300px) scale(0.5); }
+
+/* ഗ്രിഡ് സെക്ഷൻ അല്പം വൃത്തിയാക്കാൻ */
+.grid-8 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    padding: 50px 0;
+    overflow: visible; /* ആനിമേഷൻ പുറത്തേക്ക് കാണാൻ */
+}
+/* പ്രൊഡക്റ്റ് ഓവർലേ മെയിൻ സ്റ്റൈൽ */
+#product-overlay {
+    position: fixed;
+    top: 0;
+    right: -100%; /* ആദ്യം സ്ക്രീനിന് പുറത്ത് നിൽക്കും */
+    width: 400px;
+    height: 100%;
+    background: white;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    transition: right 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 20px;
+    align-items: center;
+}
+
+#product-overlay.active {
+    right: 0; /* ക്ലിക്ക് ചെയ്യുമ്പോൾ ഉള്ളിലേക്ക് വരും */
+}
+
+.overlay-img {
+    width: 100%;
+    max-height: 350px;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.overlay-name {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+/* Instagram സ്റ്റൈൽ ബട്ടൺ */
+.insta-box {
+    width: 100%;
+    padding: 15px;
+    text-decoration: none;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-weight: 500;
+    /* Instagram Gradient */
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    box-shadow: 0 4px 15px rgba(188, 24, 136, 0.3);
+}
+
+.insta-text {
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.insta-icon-wrapper {
+    background: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #bc1888;
+    font-size: 20px;
+}
+
+.close-overlay {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #333;
+}
+/* Side Panel Styles */
+.side-panel {
+    position: fixed;
+    top: 0;
+    width: 350px;
+    height: 100%;
+    background: white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    z-index: 20000;
+    transition: all 0.5s ease;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* തുടക്കത്തിൽ സ്ക്രീനിന് പുറത്ത് നിർത്താൻ */
+.side-panel.left-hide { left: -400px; right: auto; }
+.side-panel.right-hide { right: -400px; left: auto; }
+
+/* കാണിക്കാൻ വേണ്ടിയുള്ള ക്ലാസുകൾ */
+.side-panel.show-left { left: 0 !important; right: auto; }
+.side-panel.show-right { right: 0 !important; left: auto; }
+
+.panel-content { width: 100%; text-align: center; }
+
+#panel-img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#panel-name { font-size: 20px; margin-bottom: 20px; text-transform: uppercase; }
+
+.close-panel {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.insta-button {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    border-radius: 10px;
+    width: 90%;
+    margin-top: 30px;
+    font-weight: bold;
+}

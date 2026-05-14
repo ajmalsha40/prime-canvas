@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logo Loading Animation</title>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #1a1a1a; 
+        margin: 0;
+    }
+
+    .loader-container {
+        position: fixed; /* പേജിന് മുകളിൽ തന്നെ നിൽക്കാൻ fixed ആക്കി */
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-color: #1a1a1a;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999; /* എല്ലാത്തിനും മുകളിൽ വരാൻ */
+    }
+
+    .loader-content {
+        position: relative;
+        width: 300px;
+        height: 150px;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .dots-container {
+        position: absolute;
+        bottom: 15px; 
+        width: 100%;
+        height: 10px;
+    }
+
+    .dot {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #ffffff;
+        border-radius: 50%;
+        opacity: 1;
+    }
+
+    #dot-1 { left: 75px; }
+    #dot-2 { left: 135px; }
+    #dot-3 { left: 195px; }
+    #dot-4 { left: 255px; }
+
+    .logo-wrapper {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+    }
+
+    .logo {
+        width: 40px;
+        height: 40px;
+        background-color: #4a154b;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-family: sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<div class="loader-container" id="loader">
+    <div class="loader-content">
+        <div class="dots-container">
+            <div class="dot" id="dot-1"></div>
+            <div class="dot" id="dot-2"></div>
+            <div class="dot" id="dot-3"></div>
+            <div class="dot" id="dot-4"></div>
+        </div>
+        <div class="logo-wrapper" id="logo-wrapper">
+            <div class="logo" id="logo">IMG</div> 
+        </div>
+    </div>
+</div>
+
+<script>
+    const wrapper = document.getElementById('logo-wrapper');
+    const logo = document.getElementById('logo');
+    const dots = [
+        document.getElementById('dot-1'),
+        document.getElementById('dot-2'),
+        document.getElementById('dot-3'),
+        document.getElementById('dot-4')
+    ];
+
+    const positions = [0, 60, 120, 180, 240];
+    const FORWARD_SECS = 1500;
+    const JUMP_SECS = 500;
+    const JUMP_HEIGHT = 100;
+
+    async function animateLoader() {
+        while (true) {
+            dots.forEach(d => d.style.opacity = '1'); 
+
+            let forwardAnim = wrapper.animate([
+                { transform: `translateX(${positions[0]}px)` },
+                { transform: `translateX(${positions[4]}px)` }
+            ], {
+                duration: FORWARD_SECS,
+                easing: 'linear',
+                fill: 'forwards'
+            });
+
+            let startTime = performance.now();
+            let eatInterval = setInterval(() => {
+                let elapsed = performance.now() - startTime;
+                let progress = Math.min(elapsed / FORWARD_SECS, 1);
+                let currentX = positions[4] * progress;
+
+                dots.forEach((dot, index) => {
+                    if (currentX > positions[index + 1] - 15) {
+                        dot.style.opacity = '0';
+                    }
+                });
+            }, 30);
+
+            await forwardAnim.finished;
+            clearInterval(eatInterval);
+            dots.forEach(d => d.style.opacity = '0'); 
+
+            await new Promise(r => setTimeout(r, 100));
+
+            for (let i = 4; i > 0; i--) {
+                dots[i - 1].style.opacity = '1';
+
+                let xAnim = wrapper.animate([
+                    { transform: `translateX(${positions[i]}px)` },
+                    { transform: `translateX(${positions[i - 1]}px)` }
+                ], { duration: JUMP_SECS, easing: 'linear', fill: 'forwards' });
+
+                let yAnim = logo.animate([
+                    { transform: 'translateY(0px)', easing: 'ease-out' },
+                    { transform: `translateY(-${JUMP_HEIGHT}px)`, offset: 0.5, easing: 'ease-in' },
+                    { transform: 'translateY(0px)' }
+                ], { duration: JUMP_SECS });
+
+                await Promise.all([xAnim.finished, yAnim.finished]);
+            }
+            await new Promise(r => setTimeout(r, 200));
+        }
+    }
+
+    animateLoader();
+
+    // --- നിങ്ങൾ അയച്ചുതന്ന പുതിയ JS കോഡുകൾ താഴെ ചേർക്കുന്നു ---
+
+    // 1. പേജ് ലോഡ് ആയിക്കഴിഞ്ഞാൽ ആനിമേഷൻ നിർത്താൻ
+    window.addEventListener("load", function() {
+        document.getElementById("loader").style.display = "none";
+    });
+
+    // 2. ഏതെങ്കിലും ലിങ്കിൽ ക്ലിക്ക് ചെയ്യുമ്പോൾ വീണ്ടും ലോഡിങ് കാണിക്കാൻ (Optional)
+    // ശ്രദ്ധിക്കുക: നിങ്ങളുടെ ലിങ്കുകൾക്ക് id="my-link" എന്ന് ഉണ്ടെങ്കിൽ മാത്രമേ ഇത് പ്രവർത്തിക്കൂ
+    document.addEventListener("click", function(event) {
+        if (event.target.id === "my-link") {
+            document.getElementById("loader").style.display = "flex";
+        }
+    });
+</script>
+
+</body>
+</html>
