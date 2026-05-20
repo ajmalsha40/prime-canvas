@@ -349,3 +349,45 @@ function closeOverlay() {
         overlay.style.display = 'none';
     }, 500);
 }
+document.addEventListener("DOMContentLoaded", function() {
+    
+    const productCards = document.querySelectorAll('.product-card'); 
+    const sidePanel = document.getElementById('product-side-panel');
+    const panelImg = document.getElementById('panel-img');
+    const panelName = document.getElementById('panel-name');
+
+    productCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            e.preventDefault(); 
+            e.stopPropagation(); 
+
+            const imgElement = this.querySelector('img'); 
+            const nameElement = this.querySelector('.product-label'); 
+
+            if (imgElement && nameElement) {
+                panelImg.src = imgElement.src;
+                panelName.innerText = nameElement.innerText;
+            }
+
+            // മുൻപത്തെ ക്ലാസുകൾ പൂർണ്ണമായി മാറ്റുന്നു
+            sidePanel.classList.remove('active', 'left-panel', 'right-panel');
+
+            // ലെഫ്റ്റ്/റൈറ്റ് ഏതാണെന്ന് നോക്കി ക്ലാസ് നൽകുന്നു
+            if (this.classList.contains('left-product')) {
+                sidePanel.classList.add('left-panel');
+            } else {
+                sidePanel.classList.add('right-panel');
+            }
+
+            // ചെറിയൊരു ഡിലേയ്ക്ക് ശേഷം പാനൽ സ്ക്രീനിലേക്ക് കൊണ്ടുവരുന്നു
+            setTimeout(() => {
+                sidePanel.classList.add('active');
+            }, 50);
+        });
+    });
+});
+
+// ക്ലോസ് ബട്ടൺ (X) ഫംഗ്ഷൻ
+function closeSidePanel() {
+    document.getElementById('product-side-panel').classList.remove('active');
+}
