@@ -804,3 +804,113 @@ footer {
     margin-top: 30px;
     font-weight: bold;
 }
+/* --- SIDE PANEL STYLES --- */
+.side-panel {
+    position: fixed;
+    top: 0;
+    width: 35%; 
+    min-width: 320px;
+    height: 100vh;
+    background: #ffffff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    z-index: 999999; 
+    transition: transform 0.4s ease-in-out;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    /* ഡിഫോൾട്ടായി പാനൽ സ്ക്രീനിന് പുറത്തായിരിക്കും (മറഞ്ഞിരിക്കും) */
+    transform: translateX(-150%); 
+}
+
+/* ലെഫ്റ്റ് പാനൽ പൊസിഷൻ */
+.side-panel.left-panel {
+    left: 0;
+    transform: translateX(-150%); /* സ്ക്രീനിന് ഇടത് വശത്ത് പുറത്ത് */
+    border-right: 2px solid #ddd;
+}
+
+/* റൈറ്റ് പാനൽ പൊസിഷൻ */
+.side-panel.right-panel {
+    right: 0;
+    transform: translateX(150%); /* സ്ക്രീനിന് വലത് വശത്ത് പുറത്ത് */
+    border-left: 2px solid #ddd;
+}
+
+/* പ്രോഡക്റ്റിൽ കുത്തുമ്പോൾ പാനൽ സ്ക്രീനിലേക്ക് വരാൻ (ആനിമേഷൻ) */
+.side-panel.active {
+    transform: translateX(0) !important;
+}
+
+.panel-content {
+    text-align: center;
+    width: 100%;
+}
+
+#panel-img {
+    max-width: 90%;
+    max-height: 40vh;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    object-fit: contain;
+}
+
+#panel-name {
+    font-family: sans-serif;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* --- INSTAGRAM BUTTON & SECTION --- */
+.security-order-section {
+    margin-top: 15px;
+    padding: 20px;
+    border-radius: 12px;
+    background: #f4f4f4;
+}
+
+.security-order-section p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.insta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(225, 48, 108, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.insta-button:hover {
+    transform: scale(1.05);
+}
+
+/* ക്ലോസ് ബട്ടൺ (X) */
+.close-panel {
+    position: absolute;
+    top: 20px;
+    font-size: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s;
+}
+.close-panel:hover { color: red; }
+.side-panel.left-panel .close-panel { right: 20px; }
+.side-panel.right-panel .close-panel { left: 20px; }
