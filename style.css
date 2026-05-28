@@ -914,3 +914,137 @@ footer {
 .close-panel:hover { color: red; }
 .side-panel.left-panel .close-panel { right: 20px; }
 .side-panel.right-panel .close-panel { left: 20px; }
+/* =======================================================
+   MOBILE & TABLET RESPONSIVE STYLES 
+   (ഈ ഭാഗം നിങ്ങളുടെ style.css ഫയലിന്റെ ഏറ്റവും ഒടുവിൽ പേസ്റ്റ് ചെയ്യുക)
+   ======================================================= */
+
+@media (max-width: 768px) {
+    /* ഹെഡർ കണ്ടെയ്നർ ക്രമീകരണം */
+    .header-container {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+    
+    .logo {
+        font-size: 26px;
+    }
+
+    nav ul {
+        padding: 0;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    /* ഹീറോ സെക്ഷൻ & വീഡിയോ */
+    .hero-section {
+        padding: 40px 15px;
+    }
+
+    .hero-video-wrapper {
+        height: 480px; /* മൊബൈലിൽ വീഡിയോയുടെ ഉയരം കുറയ്ക്കുന്നു */
+    }
+
+    h1 {
+        font-size: 28px;
+        line-height: 1.3;
+    }
+
+    /* ഹീറോ ഇമേജുകളും സ്പ്ലിറ്റ് അനിമേഷനും മൊബൈലിനായി മാറ്റുന്നത് */
+    .image-container {
+        gap: 15px;
+        margin: 30px 0;
+        align-items: center;
+    }
+
+    .image-container img {
+        width: 90px;  /* മൊബൈൽ സ്ക്രീനിൽ ഒതുങ്ങാൻ ഇമേജ് സൈസ് കുറച്ചു */
+        height: 125px;
+    }
+
+    /* അനിമേഷൻ ദൂരം മൊബൈലിന് അനുയോജ്യമാക്കുന്നു (Width 90px + Gap 15px = 105px) */
+    @keyframes splitLeft {
+        0% { left: 105px; opacity: 1; }
+        100% { left: 0px; opacity: 1; }
+    }
+
+    @keyframes splitRight {
+        0% { right: 105px; opacity: 0; transform: translateX(0); }
+        100% { right: 0px; opacity: 1; transform: translateX(10px); }
+    }
+
+    /* കാറ്റഗറി ഗ്രിഡ് (8 ഇമേജ് സെക്ഷൻ) */
+    .grid-8 {
+        grid-template-columns: repeat(2, 1fr); /* 4 കോളത്തിന് പകരം മൊബൈലിൽ 2 കോളങ്ങൾ */
+        gap: 20px;
+        padding: 20px 10px;
+    }
+
+    /* കാറ്റഗറി അനിമേഷന്റെ തുടക്ക ദൂരം മൊബൈലിനായി കുറയ്ക്കുന്നു */
+    .category-box:nth-child(2) { transform: translate(-30px, -20px) scale(0.7); }
+    .category-box:nth-child(3) { transform: translate(-60px, -40px) scale(0.7); }
+    .category-box:nth-child(4) { transform: translate(-90px, -50px) scale(0.7); }
+    .category-box:nth-child(5) { transform: translate(-20px, 40px) scale(0.7); }
+    .category-box:nth-child(6) { transform: translate(-40px, 60px) scale(0.7); }
+    .category-box:nth-child(7) { transform: translate(-60px, 80px) scale(0.7); }
+    .category-box:nth-child(8) { transform: translate(-80px, 100px) scale(0.7); }
+
+    /* പ്രൊഡക്റ്റ് ഫുൾ പേജ് ഗ്രിഡ് */
+    .grid-2-col {
+        grid-template-columns: 1fr; /* 2 കോളത്തിന് പകരം മൊബൈലിൽ സിംഗിൾ കോളം */
+        gap: 25px;
+    }
+
+    /* സൈഡ് പാനൽ (Product Details Slide-out) */
+    .side-panel {
+        width: 85%; /* മൊബൈലിൽ പാനൽ സ്ക്രീനിന്റെ 85% വീതി എടുക്കും */
+        min-width: 290px;
+        padding: 25px 15px;
+    }
+
+    #panel-img {
+        max-height: 35vh;
+    }
+
+    #panel-name {
+        font-size: 18px;
+    }
+
+    /* ലോഗിൻ / സൈൻ അപ്പ് ബോക്സ് */
+    .modal-box {
+        width: 90%;
+        padding: 20px;
+    }
+
+    /* ടൂൾടിപ്പുകൾ (Tooltips) */
+    .tooltip-content {
+        width: 270px;
+        font-size: 12px;
+        padding: 15px;
+    }
+
+    /* ഫൂട്ടർ ക്രമീകരണം */
+    .footer-container {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .footer-nav ul {
+        justify-content: center;
+        padding: 0;
+        gap: 15px;
+    }
+
+    .social-icons {
+        margin-top: 10px;
+    }
+
+    .social-icons a {
+        margin: 0 10px;
+    }
+}
