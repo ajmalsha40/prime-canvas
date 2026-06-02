@@ -914,3 +914,9 @@ footer {
 .close-panel:hover { color: red; }
 .side-panel.left-panel .close-panel { right: 20px; }
 .side-panel.right-panel .close-panel { left: 20px; }
+/* പ്രൊഡക്റ്റ് ഇമേജുകൾ കറക്റ്റ് സൈസിൽ ആക്കാൻ */
+.product-card .img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
